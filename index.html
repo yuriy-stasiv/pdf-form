@@ -1,0 +1,776 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/pdf-lib@1.4.0"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit@0.0.4"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7"></script>
+    <script src="./script.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Cudzoziemcy</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <form class="mt-3 col-8 mx-auto" id="form" onsubmit="modifyPdf();return false">
+
+            <h1 class="text-center">WNIOSEK O UDZIELENIE CUDZOZIEMCOWI ZEZWOLENIA NA POBYT CZASOWY</h1>
+
+            <!-- Wojewoda -->
+            <div class="mb-3 pt-3">
+                <label for="wojewoda" class="form-label">Wniosek skierowany do:</label>
+                <select id="wojewoda" class="form-select form-select-md mb-3" aria-label=".form-select-md example">
+                    <option value="Wojewoda Dolnośląski">Wojewoda Dolnośląski</option>
+                    <option value="Wojewoda Kujawsko-Pomorski">Wojewoda Kujawsko-Pomorski</option>
+                    <option value="Wojewoda Lubelski">Wojewoda Lubelski</option>
+                    <option value="Wojewoda Lubuski">Wojewoda Lubuski</option>
+                    <option value="Wojewoda Łódzki">Wojewoda Łódzki</option>
+                    <option value="Wojewoda Mazowiecki">Wojewoda Mazowiecki</option>
+                    <option value="Wojewoda Małopolski">Wojewoda Małopolski</option>
+                    <option value="Wojewoda Opolski">Wojewoda Opolski</option>
+                    <option value="Wojewoda Podkarpacki">Wojewoda Podkarpacki</option>
+                    <option value="Wojewoda Podlaski">Wojewoda Podlaski</option>
+                    <option value="Wojewoda Pomorski">Wojewoda Pomorski</option>
+                    <option value="Wojewoda Śląski">Wojewoda Śląski</option>
+                    <option value="Wojewoda Świętokrzyski">Wojewoda Świętokrzyski</option>
+                    <option value="Wojewoda Warmińsko-Mazurski">Wojewoda Warmińsko-Mazurski</option>
+                    <option value="Wojewoda Wielkoposki">Wojewoda Wielkoposki</option>
+                    <option value="Wojewoda Zachodniopomorski">Wojewoda Zachodniopomorski</option>
+                </select>
+            </div>
+
+            <!-- A. Dane osobowe -->
+            <div class="col-6">
+                <h4 class="pb-3 pt-5">A. DANE OSOBOWE CUDZOZIEMCA</h4>
+
+                <!-- 1. Surname -->
+                <div>
+                    <div class="mb-3 col align-self-start">
+                        <label for="surname" class="form-label">1. Nazwisko</label>
+                        <input type="text" id="surname" class="form-control" maxlength="20" required>
+                    </div>
+                </div>
+
+
+                <!-- 2. Previosly used surname -->
+                <div class="mb-3">
+                    <label for="previousSurname" class="form-label">2. Nazwisko (a) poprzednie</label>
+                    <div class="input-group ">
+                        <input type="text" id="previousSurname" class="form-control me-1 " maxlength="20">
+                        <input type="text" id="previousSurname2" class="form-control ms-1" maxlength="20">
+                    </div>
+                </div>
+
+                <!-- 3. Family name -->
+                <div class="mb-3">
+                    <label for="famName" class="form-label">3. Nazwisko rodowe</label>
+                    <input type="text" id="famName" class="form-control" maxlength="20" required>
+                </div>
+
+                <!-- 4. Firstname -->
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">4. Imię (imiona)</label>
+                    <div class="input-group">
+                        <input type="text" id="firstName" class="form-control" maxlength="20" required>
+                        <input type="text" id="firstName2" class="form-control" maxlength="20">
+                    </div>
+
+                </div>
+
+                <!-- 5. Prevname -->
+                <div class="mb-3">
+                    <label for="prevFirstName" class="form-label">5. Imię (imiona) poprzednie</label>
+                    <div class="input-group">
+                        <input type="text" id="prevFirstName" class="form-control" maxlength="20">
+                        <input type="text" id="prevFirstName2" class="form-control" maxlength="20">
+                    </div>
+                </div>
+
+                <!-- 6. Father's name -->
+                <div class="mb-3">
+                    <label for="fatherName" class="form-label">6. Imię ojca</label>
+                    <input type="text" id="fatherName" class="form-control" maxlength="20" required>
+                </div>
+
+                <!-- 7. Mother's name -->
+                <div class="mb-3">
+                    <label for="motherName" class="form-label">7. Imię matki</label>
+                    <input type="text" id="motherName" class="form-control" maxlength="20" required>
+                </div>
+
+
+                <!-- 8. Mother's maiden name -->
+                <div class="mb-3">
+                    <label for="motherMaiName" class="form-label">8. Nazwisko rodowe matki</label>
+                    <input type="text" id="motherMaiName" class="form-control" maxlength="20" required>
+                </div>
+
+                <!-- 9. Date of birth -->
+                <div class="mb-3">
+                    <label for="birthDate" class="form-label">9. Data urodzenia</label>
+                    <input type="date" id="birthDate" class="form-control" required>
+                </div>
+
+                <!-- 10. Sex -->
+                <div class="mb-3">
+                    <label for="sex" class="form-label">10. Płeć</label>
+                    <!-- <input type="text" id="sex" class="form-control"> -->
+                    <select id="sex" class="form-select form-select-md mb-3" aria-label=".form-select-md example"
+                        required>
+                        <option value="K">kobieta</option>
+                        <option value="M">mężczyzna</option>
+                    </select>
+                </div>
+
+                <!-- 11. Place of birth -->
+                <div class="mb-3">
+                    <label for="birthPlace" class="form-label">11. Miejsce urodzenia</label>
+                    <input type="text" id="birthPlace" class="form-control" maxlength="20" required>
+                </div>
+
+                <!-- 12. Country of birth -->
+                <div class="mb-3">
+                    <label for="birthCountry" class="form-label">12. Państwo urodzenia</label>
+                    <input id="birthCountry" list="birthCountryOptions" class="form-control" maxlength="20" required>
+                    <datalist id="birthCountryOptions">
+                        <option value="Armenia">
+                        <option value="Białoruś">
+                        <option value="Gruzja">
+                        <option value="Mołdawia">
+                        <option value="Rosja">
+                        <option value="Ukraina">
+                    </datalist>
+                </div>
+
+                <!-- 13. Nationality -->
+                <div class="mb-3">
+                    <label for="nationality" class="form-label">13. Narodowość</label>
+                    <input id="nationality" list="nationalityOptions" class="form-control" maxlength="20" required>
+                    <datalist id="nationalityOptions">
+                        <option value="Ormiańska">
+                        <option value="Białoruska">
+                        <option value="Gruzińska">
+                        <option value="Mołdawska">
+                        <option value="Rosyjska">
+                        <option value="Ukraińska">
+                    </datalist>
+                </div>
+
+                <!-- 14. Citizenship -->
+                <div class="mb-3">
+                    <label for="citizenship" class="form-label">14. Obywatelstwo</label>
+                    <input id="citizenship" list="citizenshipOptions" class="form-control" maxlength="20" required>
+                    <datalist id="citizenshipOptions">
+                        <option value="Ormiańskie">
+                        <option value="Białoruskie">
+                        <option value="Gruzińskie">
+                        <option value="Mołdawskie">
+                        <option value="Rosyjskie">
+                        <option value="Ukraińskie">
+                    </datalist>
+                </div>
+
+                <!-- 15. Marial status -->
+                <div class="mb-3">
+                    <label for="marital" class="form-label">15. Stan cywilny</label>
+                    <input id="marital" list="maritalOptions" class="form-control" maxlength="20" required>
+                    <datalist id="maritalOptions">
+                        <option value="Kawaler">
+                        <option value="Panna">
+                        <option value="Żonaty">
+                        <option value="Mężatka">
+                        <option value="Wdowiec">
+                        <option value="Wdowa">
+                        <option value="Rozwiedziony">
+                        <option value="Rozwiedziona">
+                    </datalist>
+                </div>
+
+                <!-- 16. Education -->
+                <div class="mb-3">
+                    <label for="education" class="form-label">16. Wykszałcenie</label>
+                    <input id="education" list="educationOptions" class="form-control" maxlength="20" required>
+                    <datalist id="educationOptions">
+                        <option value="Podstawowe">
+                        <option value="Gimnazjalne">
+                        <option value="Zasadnicze zawodowe">
+                        <option value="Zasadnicze branżowe">
+                        <option value="Średnie branżowe">
+                        <option value="Średnie">
+                        <option value="Wyższe">
+                    </datalist>
+                </div>
+
+                <!-- 17. Decription -->
+                <div class="mb-3">
+                    17. Rysopis
+                </div>
+
+                <!-- 17.1. Height -->
+                <div class="mb-3">
+                    <label for="heightDescr" class="form-label">Wzrost</label>
+                    <input type="number" id="heightDescr" class="form-control" min="0" max="999" maxlength="3" required>
+                </div>
+                <!-- 17.2. Colour of eyes -->
+                <div class="mb-3">
+                    <label for="eyeColour" class="form-label">Kolor oczu</label>
+                    <input id="eyeColour" list="eyeColourOptions" class="form-control" maxlength="20" required>
+                    <datalist id="eyeColourOptions">
+                        <option value="Brązowy">
+                        <option value="Niebieski">
+                        <option value="Szary">
+                        <option value="Szaroniebieski">
+                        <option value="Zielony">
+                    </datalist>
+                </div>
+                <!-- 17.3. Znaki szczególne -->
+                <div class="mb-3">
+                    <label for="specMarks" class="form-label">Znaki szczególne</label>
+                    <input type="text" id="specMarks" class="form-control" maxlength="20" required>
+                </div>
+
+                <!-- 18. Pesel -->
+                <div class="mb-3">
+                    <label for="pesel" class="form-label">18. Numer PESEL</label>
+                    <input id="pesel" class="form-control" maxlength="11" required>
+                </div>
+
+                <!-- 19. Phone number -->
+                <div class="mb-3">
+                    <label for="phoneNum" class="form-label">19. Numer telefonu</label>
+                    <input type="text" id="phoneNum" class="form-control" maxlength="20" required>
+                </div>
+
+                <!-- 20. Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">20. Email</label>
+                    <input type="email" id="email" class="form-control" maxlength="20" required>
+                </div>
+
+            </div>
+
+            <!-- B. Miejsce pobytu -->
+            <div>
+                <h4 class="pb-3 pt-5">B. MIEJSCE POBYTU CUDZOZIEMCA</h4>
+
+                <!-- Family member outside PL-->
+                <div class="mb-3 p-3 border">
+                    <h5>*Proszę zaznaczyć "Tak", jeżeli członek rodziny przebywa poza terytorium Rzeczypospolitej
+                        Polskiej.</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="memberOutside">
+                        <label class="form-check-label" for="memberOutside">
+                            Tak
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 1. Voivodeship -->
+                <div class="mb-3">
+                    <label for="voivodeship" class="form-label">1. Województwo</label>
+                    <select id="voivodeship" class="form-select form-select-md mb-3"
+                        aria-label=".form-select-md example">
+                        <option value="Dolnośląskie">Dolnośląskie</option>
+                        <option value="Kujawsko-Pomorskie">Kujawsko-Pomorskie</option>
+                        <option value="Lubelskie">Lubelskie</option>
+                        <option value="Lubuskie">Lubuskie</option>
+                        <option value="Łódzkie">Łódzkie</option>
+                        <option value="Mazowieckie">Mazowieckie</option>
+                        <option value="Małopolskie">Małopolskie</option>
+                        <option value="Opolskie">Opolskei</option>
+                        <option value="Podkarpackie">Podkarpackie</option>
+                        <option value="Podlaskie">Podlaskie</option>
+                        <option value="Pomorskie">Pomorskie</option>
+                        <option value="Śląskie">Śląskie</option>
+                        <option value="Świętokrzyskie">Świętokrzyskie</option>
+                        <option value="Warmińsko-Mazurskie">Warmińsko-Mazurskie</option>
+                        <option value="Wielkoposkie">Wielkoposkie</option>
+                        <option value="Zachodniopomorskie">Zachodniopomorskie</option>
+                    </select>
+                </div>
+                <!-- 2.  Town -->
+                <div class="mb-3">
+                    <label for="town" class="form-label">2. Miejscowość</label>
+                    <input type="text" id="town" class="form-control" maxlength="20" required>
+                </div>
+                <!-- 3. Street -->
+                <div class="mb-3">
+                    <label for="street" class="form-label">3. Ulica</label>
+                    <input type="text" id="street" class="form-control" maxlength="20" required>
+                </div>
+                <!-- 4. House number -->
+                <div class="mb-3">
+                    <label for="houseNum" class="form-label">4. Numer domu</label>
+                    <input type="text" id="houseNum" class="form-control" maxlength="7" required>
+                </div>
+                <!-- 5.  Apartment number -->
+                <div class="mb-3">
+                    <label for="apartmentNum" class="form-label">5. Numer mieszkania</label>
+                    <input type="text" id="apartmentNum" class="form-control" maxlength="7">
+                </div>
+                <!-- 6. Postal code -->
+                <div class="mb-3">
+                    <label for="postalCode" class="form-label">6. Kod pocztowy</label>
+                    <input type="text" id="postalCode" class="form-control" required>
+                </div>
+
+
+            </div>
+
+            <!-- C. Informacje dodatkowe -->
+            <div>
+                <h4 class="pb-3 pt-5">C. INFORMACJE DODATKOWE</h4>
+
+                <!-- I. The main purpose of sta -->
+                <h5>I. Główny cel pobytu</h5>
+                <div class="mb-3">
+                    <select id="mainPurpose" class="form-select form-select-md mb-3"
+                        aria-label=".form-select-md example" onchange="otherPurposeListener()">
+                        <option value="1">1. wykonywanie pracy</option>
+                        <option value="2">2. wykonywanie pracy w zawodzie wymagającym wysokich kwalifikacji
+                        </option>
+                        <option value="3">3. wykonywanie pracy przez cudzoziemca delegowanego przez pracodawcę
+                            zagranicznego na terytorium Rzeczypospolitej Polskiej</option>
+                        <option value="4">4. prowadzenie działalności gospodarczej</option>
+                        <option value="5">5. podjęcie lub kontynuacja stacjonarnych: studiów pierwszego stopnia,
+                            studiów drugiego stopnia lub jednolitych studiów magisterskich albo kształcenie
+                            się w szkole doktorskiej</option>
+                        <option value="6">6. prowadzenie badań naukowych lub prac rozwojowych</option>
+                        <option value="7">7. mobilność długoterminowa naukowca</option>
+                        <option value="8">8. odbycie stażu</option>
+                        <option value="9">9. udział w programie wolontariatu europejskiego</option>
+                        <option value="10">10. pobyt z obywatelem Rzeczypospolitej Polskiej</option>
+                        <option value="11">11. pobyt z pobyt z cudzoziemcem</option>
+                        <option value="12">12. mobilność długoterminowa członka rodziny naukowca</option>
+                        <option value="13">13. okoliczności związane z byciem ofiarą handlu ludźmi</option>
+                        <option value="14">14. okoliczności wymagające krótkotrwałego pobytu na terytorium
+                            Rzeczypospolitej Polskiej</option>
+                        <option value="15">15. przedłużenie pobytu na terytorium Rzeczypospolitej Polskiej ze
+                            względu na pracę sezonową</option>
+                        <option value="16">16. inne okoliczności (należy określić jakie)</option>
+                    </select>
+                </div>
+
+                <!-- IF 16 selected add comments-->
+                <div class="form-floating mb-3 d-none" id="otherPurpose">
+                    <textarea class="form-control" id="otherPurposeDescription" style="height: 100px"
+                        maxlength="170"></textarea>
+                    <label for="otherPurposeDescription">Inne okoliczności</label>
+                </div>
+
+            </div>
+
+            <!-- II. Foreigner’s stay on the territory of the Republic of Poland -->
+            <h5>II. Członkowie rodziny cudzoziemca zamieszkujący na
+                terytorium Rzeczypospolitej Polskiej</h5>
+            <div class="mb-3">
+                <!-- to do -->
+            </div>
+
+            <!-- III. Members of foreigner’s family living on the territory of the Republic of Poland -->
+            <h5 for="previousVisits" class="form-label">III. Pobyt cudzoziemca na terytorium Rzeczypospolitej Polskiej
+            </h5>
+
+            <!-- a) previous visits to the territory of the Republic of Poland -->
+            <h6>a) poprzednie pobyty na terytorium Rzeczypospolitej Polskiej</h6>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="previousVisits" style="height: 200px" maxlength="560"></textarea>
+                </div>
+            </div>
+
+            <!-- b) current stay on the territory of the Republic of Poland-->
+            <h6>b) aktualny pobyt na terytorium Rzeczypospolitej Polskiej</h6>
+            <div class="mb-3">
+                <label for="currentStay" class="form-label">1. Czy przebywa Pan (-i) na terytorium Rzeczypospolitej
+                    Polskiej?</label>
+                <select id="currentStay" class="form-select form-select-md mb-3" aria-label=".form-select-md example">
+                    <option value="Tak">Tak</option>
+                    <option value="Nie">Nie</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="lastEntry" class="form-label">2. Proszę podać datę ostatniego wjazdu Pana (-i) na terytorium
+                    Rzeczypospolitej Polskiej</label>
+                <input type="date" id="lastEntry" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="legalBasis" class="form-label">3. Na jakiej podstawie przebywa Pan (-i) aktualnie na
+                    terytorium Rzeczypospolitej Polskiej?</label>
+                <select id="legalBasis" class="form-select form-select-md mb-3" aria-label=".form-select-md example">
+                    <option value="circulation sans visa">ruchu bezwizowego</option>
+                    <option value="visa">wizy</option>
+                    <option value="temporary residence permit">zezwolenia na pobyt czasowy</option>
+                    <option value="other Schengen permit">dokumentu uprawniającego do wjazdu i pobytu wydanego przez
+                        inne państwo obszaru Schengen</option>
+                </select>
+            </div>
+
+            <!-- IV. Foreigner’s travels and stays outside the territory of the Republic of Poland within the last 5 years -->
+            <h5>IV. Podróże i pobyty zagraniczne cudzoziemca poza terytorium Rzeczypospolitej
+                Polskiej w okresie ostatnich 5 lat (państwo,
+                okres pobytu)</h5>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="travelsLastFiveYears" style="height: 200px"
+                        maxlength="620"></textarea>
+                </div>
+            </div>
+
+            <!-- V. Information about foreigner’s means of subsistence -->
+            <h5>V. Informacja o środkach finansowych na pokrycie kosztów utrzymania
+                cudzoziemca</h5>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="subsistence" style="height: 150px" maxlength="350"></textarea>
+                </div>
+            </div>
+
+            <!-- VI. Information about foreigner’s medical insurance -->
+            <h5>VI. Informacja o posiadanym przez cudzoziemca ubezpieczeniu zdrowotnym</h5>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="insurance" style="height: 150px" maxlength="350"></textarea>
+                </div>
+            </div>
+
+            <!-- VII. Are you currently detained or placed in a guarded centre or detention centre for foreigners, has
+                 any preventive measure been applied against you in the form of a ban on leaving the country, are you 
+                 currently serving a sentence of imprisonment or are you temporarily arrested?-->
+            <h5>VII. Czy jest Pan (-i) zatrzymany (-na) albo umieszczony (-na) w strzeżonym
+                ośrodku lub w areszcie dla cudzoziemców, czy został wobec Pana (-i) zastosowany środek zapobiegawczy w
+                postaci zakazu opuszczania kraju, czy odbywa Pan (-i) karę pozbawienia wolności lub czy zastosowano
+                wobec Pana (-i) tymczasowe aresztowanie?</h5>
+            <div class="mb-3">
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="arrested" style="height: 150px" maxlength="350"></textarea>
+                </div>
+            </div>
+
+            <!-- VIII. Have you been sentenced by the court on the territory of the Republic of Poland?  -->
+            <h5>VIII. Czy był(-a) Pan (-i) karany (-na) sądownie na terytorium Rzeczypospolitej Polskiej?</h5>
+            <div class="mb-3">
+                <select id="sentencedByCourt" class="form-select form-select-md mb-3"
+                    aria-label=".form-select-md example" onchange="sentencedByCourtListener()">
+                    <option value="Nie">Nie</option>
+                    <option value="Tak">Tak</option>
+                </select>
+
+            </div>
+            <div class="form-floating mb-3 d-none" id="sentencedByCourtDispaly">
+                <textarea class="form-control" id="sentencedByCourtDecription" style="height: 150px"
+                    maxlength="260"></textarea>
+            </div>
+
+            <!-- IX. Are you a subject of any criminal or contravention proceedings pending on the territory of the Republic of Poland? -->
+            <h5>IX. Czy toczy się przeciwko Panu (-i) postępowanie karne lub postępowanie w sprawach o wykroczenia na
+                terytorium
+                Rzeczypospolitej Polskiej?</h5>
+            <div class="mb-3">
+                <select id="criminal" class="form-select form-select-md mb-3" aria-label=".form-select-md example"
+                    onchange="criminalListener()">
+                    <option value="Nie">Nie</option>
+                    <option value="Tak">Tak</option>
+                </select>
+
+            </div>
+            <div class="form-floating mb-3 d-none" id="criminalDispaly">
+                <textarea class="form-control" id="criminalDecription" style="height: 150px" maxlength="260"></textarea>
+            </div>
+
+            <!-- X. Do you have any liabilities resulting from verdicts of courts, resolutions or administrative decisions,
+                 including alimony, in the territory of the Republic of Poland or abroad? -->
+            <h5>X. Czy ciążą na Panu (-i) zobowiązania wynikające z orzeczeń sądowych, postanowień i decyzji
+                administracyjnych, w tym
+                zobowiązania alimentacyjne, na terytorium Rzeczypospolitej Polskiej lub poza tym terytorium?</h5>
+            <div class="mb-3">
+                <select id="liabilities" class="form-select form-select-md mb-3" aria-label=".form-select-md example"
+                    onchange="liabilitiesListener()">
+                    <option value="Nie">Nie</option>
+                    <option value="Tak">Tak</option>
+                </select>
+
+            </div>
+            <div class="form-floating mb-3 d-none" id="liabilitiesDispaly">
+                <textarea class="form-control" id="liabilitiesDecription" style="height: 150px"
+                    maxlength="350"></textarea>
+            </div>
+
+
+            <!-- E. Załączniki -->
+            <div>
+                <h4 class="pb-3 pt-5">E. OŚWIADCZENIE</h4>
+
+                <!-- Attachments to the application -->
+                <h5>Załączniki do wniosku</h5>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">1.</label>
+                    <input id="attachments1" list="attachmentsOptions1" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions1">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">2.</label>
+                    <input id="attachments2" list="attachmentsOptions2" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions2">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">3.</label>
+                    <input id="attachments3" list="attachmentsOptions3" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions3">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">4.</label>
+                    <input id="attachments4" list="attachmentsOptions4" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions4">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">5.</label>
+                    <input id="attachments5" list="attachmentsOptions5" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions5">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">6.</label>
+                    <input id="attachments6" list="attachmentsOptions6" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions6">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">7.</label>
+                    <input id="attachments7" list="attachmentsOptions7" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions7">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">8.</label>
+                    <input id="attachments8" list="attachmentsOptions8" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions8">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center justify-content-between">
+                    <label class="pe-2">9. </label>
+                    <input id="attachments9" list="attachmentsOptions9" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions9">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">10.</label>
+                    <input id="attachments10" list="attachmentsOptions10" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions10">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">11.</label>
+                    <input id="attachments11" list="attachmentsOptions11" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions11">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">12.</label>
+                    <input id="attachments12" list="attachmentsOptions12" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions12">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">13.</label>
+                    <input id="attachments13" list="attachmentsOptions13" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions13">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">14.</label>
+                    <input id="attachments14" list="attachmentsOptions14" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions14">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+                <div class="mb-3 d-flex align-items-center">
+                    <label class="pe-2">15.</label>
+                    <input id="attachments15" list="attachmentsOptions15" class="form-control" maxlength="85">
+                    <datalist id="attachmentsOptions15">
+                        <option value="KRS">
+                        <option value="Załacznik nr 1">
+                        <option value="Ubezpieczenie">
+                        <option value="Kopia paszportu">
+                        <option value="Kopia oświadczenia">
+                        <option value="Kopia zezwolenia na pracę">
+                        <option value="Opłata skarbowa">
+                        <option value="4 zdjęcia">
+                        <option value="Kopia umowy najmu mieszkania">
+                        <option value="Kopia świadectwa urodzenia">
+                        <option value="Kopia świadectwa zawarcia związku małżeńskiego">
+                    </datalist>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Generuj PDF</button>
+        </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
